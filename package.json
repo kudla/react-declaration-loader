@@ -1,0 +1,19 @@
+{
+  "name": "react-declaration-loader",
+  "version": "1.0.0",
+  "description": "Populates jsx sources with React declaration",
+  "main": "react-declaration-loader",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kudla/react-declaration-loader.git"
+  },
+  "author": "Artem Kudla <a.v.xdev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kudla/react-declaration-loader/issues"
+  },
+  "homepage": "https://github.com/kudla/react-declaration-loader#readme"
+}
