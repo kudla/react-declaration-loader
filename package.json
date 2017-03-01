@@ -1,6 +1,6 @@
 {
   "name": "react-declaration-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Populates jsx sources with React declaration",
   "main": "react-declaration-loader",
   "scripts": {
