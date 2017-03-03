@@ -4,7 +4,7 @@
   "description": "Populates jsx sources with React declaration",
   "main": "react-declaration-loader",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/kudla/react-declaration-loader/issues"
   },
-  "homepage": "https://github.com/kudla/react-declaration-loader#readme"
+  "homepage": "https://github.com/kudla/react-declaration-loader#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
 }
