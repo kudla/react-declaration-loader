@@ -12,7 +12,7 @@ describe('react-declaration-loader', function() {
     beforeEach(function() {
         loader = {
             run: reactDeclarationLoader
-        }
+        };
     });
 
     it('should prduce loading if no cacheing is available', () => {
@@ -41,7 +41,7 @@ describe('react-declaration-loader', function() {
 
             let entries = fs.readdirSync(dir);
 
-            entries.forEach(handleEntry)
+            entries.forEach(handleEntry);
 
             function handleEntry(entry) {
                 let fullPath = path.join(dir, entry);
@@ -62,18 +62,20 @@ describe('react-declaration-loader', function() {
             function testCase(caseFile) {
                 let testName = caseFile.replace(/\..*/, '');
                 it (testName, function() {
-                    let [source, transformed] = fs
+                    let [source, expectation = source] = fs
                         .readFileSync(path.join(dir, caseFile))
                         .toString()
-                        .split(/\-{12,}\n/m);
-                    if (transformed === undefined) {
-                        transformed = source
+                        .split(/\/\/\-{12,}\n/m);
+                    if (expectation === undefined) {
+                        expectation = source;
                     }
-                    expect(loader.run(source) === transformed).to.equal(true);
+                    source = loader.run(source).split('\n');
+                    expectation = expectation.split('\n');
+                    expect(source).deep.equal(expectation);
                 });
             }
         }
-    })
+    });
 
 
 
