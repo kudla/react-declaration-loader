@@ -7,7 +7,7 @@ const expect = require('chai').expect;
 const runCases = require('./helpers/run-cases');
 
 const INTEGRATIONAL_CASES_PATH = path.join(__dirname, 'cases/integrational');
-const REACT_INJECTION = /\/\*\s*global\s+React\s*\*\/\s*(?=$)/m;
+const REACT_INJECTION = /\/\*\s*(global|inject)\s+React\s*\*\/\s*(?=$)/m;
 const REACT_DECLARATION = 'var React = require(\'react\');';
 const EMPTY_LINES = /\n[\s\n]*(?=(\n|$))/g;
 

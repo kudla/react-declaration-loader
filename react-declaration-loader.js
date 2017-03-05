@@ -23,10 +23,20 @@ function reactDeclarationLoader(source) {
     );
     return source;
 
-    function ProgramLeave(sateIgnored, node) {
-        if (node._reactUnresolved) {
+    function ProgramLeave(sateIgnored, program) {
+        if (program._reactUnresolved) {
+            var declarations = program
+                ._declarations.React || [];
+            declarations = declarations
+                .filter(function(declaration) {
+                    return declaration.type !== 'VariableDeclaration' ||
+                        declaration.kind !== 'var';
+                });
+            if (declarations.length) {
+                return;
+            }
             var injectIndex = 0;
-            var body = node.body;
+            var body = program.body;
 
             ast = escodegen.attachComments(ast, ast.comments, ast.tokens);
 
