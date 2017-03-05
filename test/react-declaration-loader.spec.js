@@ -1,6 +1,5 @@
 'use strict';
 
-
 const path = require('path');
 const reactDeclarationLoader = require('../react-declaration-loader');
 const expect = require('chai').expect;
@@ -8,6 +7,9 @@ const expect = require('chai').expect;
 const runCases = require('./helpers/run-cases');
 
 const INTEGRATIONAL_CASES_PATH = path.join(__dirname, 'cases/integrational');
+const REACT_INJECTION = /\/\*\s*global\s+React\s*\*\/\s*(?=$)/m;
+const REACT_DECLARATION = 'var React = require(\'react\');';
+const EMPTY_LINES = /\n[\s\n]*(?=(\n|$))/g;
 
 describe('react-declaration-loader', function() {
 
@@ -23,7 +25,7 @@ describe('react-declaration-loader', function() {
         loader.run('');
     });
 
-    it('should use chache if posiible', () => {
+    it('should use chache if posible', () => {
         Object.assign(
             loader,
             {
@@ -44,15 +46,24 @@ describe('react-declaration-loader', function() {
 
         function testCase(name, getSource) {
             it (name, () => {
-                let [source, expectation] = getSource()
-                    .split(/\/\/\-{12,}\n/m);
 
-                if (expectation === undefined) {
-                    expectation = source;
-                }
+                let source = getSource()
+                    .replace(EMPTY_LINES, '');
 
-                source = loader.run(source).split('\n');
+                let expectation = source
+                    .replace(REACT_INJECTION, REACT_DECLARATION);
+
+                source = source.replace(REACT_INJECTION, '');
+
+                // apply loader to source
+                source = loader.run(source)
+                    .replace(EMPTY_LINES, '');
+
+                // split source and expectation
+                // to produce line by line comaration
+                source = source.split('\n');
                 expectation = expectation.split('\n');
+
                 expect(source).deep.equal(expectation);
             });
         }
