@@ -9,6 +9,7 @@ const runCases = require('../helpers/run-cases');
 const scopeVisitor = require('../../lib/scope-visitor');
 
 const INTEGRATIONAL_CASES_PATH = path.join(__dirname, '../cases/scope-visitor');
+const EXPECTATION_DELIMETER = /\/\/.*\sscope\s.*-{7,}\n/m;
 
 describe('lib/scope-visitor-integrational', function() {
 
@@ -18,7 +19,7 @@ describe('lib/scope-visitor-integrational', function() {
         it (name, function() {
 
             let [source, expectations] = getSource()
-                .split(/\/\/\-{12,}\n/m);
+                .split(EXPECTATION_DELIMETER);
             expectations = JSON.parse(expectations);
 
             let ast = esprima.parse(source, {comment: true});
