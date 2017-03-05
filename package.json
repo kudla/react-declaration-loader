@@ -4,7 +4,7 @@
   "description": "Populates jsx sources with React declaration",
   "main": "react-declaration-loader",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --recursive 'test/**/*.spec.js'",
     "eslint": "eslint ."
   },
   "repository": {
@@ -20,6 +20,12 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^3.17.0",
-    "mocha": "^3.2.0"
+    "lodash": "^4.17.4",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "esprima": "^3.1.3",
+    "estraverse": "^4.2.0"
   }
 }

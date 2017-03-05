@@ -1,9 +1,13 @@
 'use strict';
 
-const fs = require('fs');
+
 const path = require('path');
 const reactDeclarationLoader = require('../react-declaration-loader');
 const expect = require('chai').expect;
+
+const runCases = require('./helpers/run-cases');
+
+const INTEGRATIONAL_CASES_PATH = path.join(__dirname, 'cases/integrational');
 
 describe('react-declaration-loader', function() {
 
@@ -34,46 +38,23 @@ describe('react-declaration-loader', function() {
         expect(loader.cached).to.equal(1);
     });
 
-    describe('cases', () => {
-        const casesPath = path.join(__dirname, 'cases');
-        getCases(casesPath);
-        function getCases(dir) {
+    describe('integrational cases', () => {
 
-            let entries = fs.readdirSync(dir);
+        runCases(INTEGRATIONAL_CASES_PATH, testCase);
 
-            entries.forEach(handleEntry);
+        function testCase(name, getSource) {
+            it (name, () => {
+                let [source, expectation] = getSource()
+                    .split(/\/\/\-{12,}\n/m);
 
-            function handleEntry(entry) {
-                let fullPath = path.join(dir, entry);
-                let isCase = fs
-                .lstatSync(fullPath)
-                .isFile();
-
-                if (isCase) {
-                    testCase(entry);
-
-                } else {
-                    describe(entry, function() {
-                        getCases(fullPath);
-                    });
+                if (expectation === undefined) {
+                    expectation = source;
                 }
-            }
 
-            function testCase(caseFile) {
-                let testName = caseFile.replace(/\..*/, '');
-                it (testName, function() {
-                    let [source, expectation = source] = fs
-                        .readFileSync(path.join(dir, caseFile))
-                        .toString()
-                        .split(/\/\/\-{12,}\n/m);
-                    if (expectation === undefined) {
-                        expectation = source;
-                    }
-                    source = loader.run(source).split('\n');
-                    expectation = expectation.split('\n');
-                    expect(source).deep.equal(expectation);
-                });
-            }
+                source = loader.run(source).split('\n');
+                expectation = expectation.split('\n');
+                expect(source).deep.equal(expectation);
+            });
         }
     });
 
