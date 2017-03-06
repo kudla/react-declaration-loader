@@ -11,6 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/kudla/react-declaration-loader.git"
   },
+  "keywords": [
+    "webpack",
+    "loader",
+    "react",
+    "declaration",
+    "jsx",
+    "module"
+  ],
   "author": "Artem Kudla <a.v.xdev@gmail.com>",
   "license": "MIT",
   "bugs": {
