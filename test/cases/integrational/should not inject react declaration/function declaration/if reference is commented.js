@@ -1,0 +1,3 @@
+function someFunctionIgnored() {
+    //React.render();
+}

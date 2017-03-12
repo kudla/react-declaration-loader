@@ -20,21 +20,32 @@ function runCases(dir, testCase) {
         if (isCase) {
             runCase(entry);
         } else {
-            describe(entry, () => {
+            let {name, modifier} = resolveEntry(entry);
+            let describer = modifier ? describe[modifier] : describe;
+
+            describer(name, () => {
                 runCases(fullPath, testCase);
             });
         }
     }
 
     function runCase(caseFile) {
-        let name = caseFile.replace(/\..*/, '');
+        let {name, modifier} = resolveEntry(caseFile);
 
-        testCase(name, getSource);
+        testCase(name, getSource, modifier);
 
         function getSource() {
             return fs
             .readFileSync(path.join(dir, caseFile))
             .toString();
         }
+    }
+
+    function resolveEntry(entry) {
+        let [name, modifier] = entry.split('.');
+        if (['skip', 'only'].indexOf(modifier) === -1) {
+            modifier = undefined;
+        }
+        return {name, modifier};
     }
 }

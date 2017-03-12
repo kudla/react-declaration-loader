@@ -44,8 +44,9 @@ describe('react-declaration-loader', function() {
 
         runCases(INTEGRATIONAL_CASES_PATH, testCase);
 
-        function testCase(name, getSource) {
-            it (name, () => {
+        function testCase(name, getSource, modifier) {
+            let itFunction = modifier ? it[modifier] : it;
+            itFunction (name, () => {
 
                 let source = getSource()
                     .replace(EMPTY_LINES, '');

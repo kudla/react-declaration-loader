@@ -2,7 +2,7 @@ var a;
 function b(c) {
     var d;
 }
-// should produce such a scope structure ---------------------------------------
+// should produce such a context structure ---------------------------------------
 {
     "Identifier": {
         "a": {
@@ -41,7 +41,7 @@ function b(c) {
                 "id": 0
             },
             "block": {
-                "type": "BlockStatement",
+                "type": "FunctionDeclaration",
                 "id": 0
             }
         }

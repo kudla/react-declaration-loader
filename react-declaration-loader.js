@@ -3,7 +3,7 @@
 var esprima = require('esprima');
 var traverse = require('./lib/traverse');
 var escodegen = require('escodegen');
-var scopeVisitor = require('./lib/scope-visitor');
+var contextVisitor = require('./lib/context-visitor');
 var declarationVisitors = require('./lib/declaration-visitors');
 var reactReferenceVisitor = require('./lib/react-reference-visitor');
 
@@ -14,7 +14,7 @@ function reactDeclarationLoader(source) {
     var ast = esprima.parse(source, {tokens: true, range: true, comment: true });
     traverse(
         ast,
-        scopeVisitor,
+        contextVisitor,
         declarationVisitors,
         reactReferenceVisitor,
         {
@@ -24,17 +24,27 @@ function reactDeclarationLoader(source) {
     return source;
 
     function ProgramLeave(sateIgnored, program) {
+        var injectReact = false;
         if (program._reactUnresolved) {
             var declarations = program
                 ._declarations.React || [];
-            declarations = declarations
-                .filter(function(declaration) {
-                    return declaration.type !== 'VariableDeclaration' ||
-                        declaration.kind !== 'var';
-                });
-            if (declarations.length) {
-                return;
+            var unresolvedInThisClosure = program._unresolvedInThisClosure;
+
+            if (unresolvedInThisClosure){
+                var conflicts = declarations
+                    .filter(function(node){
+                        return node.type === 'VariableDeclaration' &&
+                            node.kind !== 'var';
+                    }).length;
+                injectReact = !conflicts;
+            } else if (!declarations.length) {
+                injectReact = true;
             }
+        }
+        if (injectReact) {
+            injectDeclaration();
+        }
+        function injectDeclaration() {
             var injectIndex = 0;
             var body = program.body;
 

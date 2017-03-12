@@ -6,12 +6,12 @@ const expect = require('chai').expect;
 const esprima = require('esprima');
 const traverse = require('../../lib/traverse');
 const runCases = require('../helpers/run-cases');
-const scopeVisitor = require('../../lib/scope-visitor');
+const contextVisitor = require('../../lib/context-visitor');
 
-const INTEGRATIONAL_CASES_PATH = path.join(__dirname, '../cases/scope-visitor');
-const EXPECTATION_DELIMETER = /\/\/.*\sscope\s.*-{7,}\n/m;
+const INTEGRATIONAL_CASES_PATH = path.join(__dirname, '../cases/context-visitor');
+const EXPECTATION_DELIMETER = /\/\/.*\scontext\s.*-{7,}\n/m;
 
-describe('lib/scope-visitor-integrational', function() {
+describe('lib/context-visitor-integrational', function() {
 
     runCases(INTEGRATIONAL_CASES_PATH, testCase);
 
@@ -24,7 +24,7 @@ describe('lib/scope-visitor-integrational', function() {
 
             let ast = esprima.parse(source, {comment: true});
             let counter = {};
-            traverse(ast, scopeVisitor, {
+            traverse(ast, contextVisitor, {
                 enter(stateIgnored, node) {
                     if (!node._countId) {
                         let _countId = (counter[node.type] + 1) || 0;
@@ -42,7 +42,7 @@ describe('lib/scope-visitor-integrational', function() {
                 }
                 let {name, _countId, type} = node;
                 let id = name || _countId;
-                let {closure, block} = node._scope;
+                let {closure, block} = node._context;
                 let expectClosure = _.get(expectations, [type, id, 'closure'], {});
                 let expectBlock = _.get(expectations, [type, id, 'block'], {});
                 expect(closure.type).to.equal(expectClosure.type, `${type} "${id}" closure type`);

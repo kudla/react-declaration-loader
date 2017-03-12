@@ -1,10 +1,8 @@
 var a;
 {
-    {
-        var b;
-    }
+    var b;
 }
-// should produce such a scope structure ---------------------------------------
+// should produce such a context structure ---------------------------------------
 {
     "Identifier": {
         "a": {
@@ -24,7 +22,7 @@ var a;
             },
             "block": {
                 "type": "BlockStatement",
-                "id": 1
+                "id": 0
             }
         }
     },
@@ -39,23 +37,13 @@ var a;
         }
     }],
     "BlockStatement": [{
-            "closure": {
-                "type": "Program",
-                "id": 0
-            },
-            "block": {
-                "type": "BlockStatement",
-                "id": 0
-            }
+        "closure": {
+            "type": "Program",
+            "id": 0
         },
-        {
-            "closure": {
-                "type": "Program",
-                "id": 0
-            },
-            "block": {
-                "type": "BlockStatement",
-                "id": 1
-            }
+        "block": {
+            "type": "BlockStatement",
+            "id": 0
+        }
     }]
 }

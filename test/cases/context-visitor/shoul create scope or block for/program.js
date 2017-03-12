@@ -1,5 +1,5 @@
 var a;
-// should produce such a scope structure ---------------------------------------
+// should produce such a context structure ---------------------------------------
 {
     "Identifier": {
         "a": {
