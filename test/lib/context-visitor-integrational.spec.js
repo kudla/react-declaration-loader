@@ -15,8 +15,9 @@ describe('lib/context-visitor-integrational', function() {
 
     runCases(INTEGRATIONAL_CASES_PATH, testCase);
 
-    function testCase(name, getSource) {
-        it (name, function() {
+    function testCase(name, getSource, modifier) {
+        let itFunction = modifier ? it[modifier] : it;
+        itFunction (name, function() {
 
             let [source, expectations] = getSource()
                 .split(EXPECTATION_DELIMETER);
