@@ -23,7 +23,7 @@ function reactDeclarationLoader(source) {
     );
     return source;
 
-    function ProgramLeave(sateIgnored, program) {
+    function ProgramLeave(program) {
         var injectReact = false;
         if (program._reactUnresolved) {
             var declarations = program

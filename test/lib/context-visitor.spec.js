@@ -11,7 +11,6 @@ describe('lib/context-visitor', function() {
 
         let node;
         let parent;
-        let state = {};
 
         describe('if react was not resolved in closure', () => {
             let closure = {};
@@ -31,7 +30,7 @@ describe('lib/context-visitor', function() {
 
                 it('should mark parent closure as "unresolved" for closure nodes', () => {
                     node._context.closure = node;
-                    leave(state, node, parent);
+                    leave(node, parent);
                     expect(parent._reactUnresolved).deep.equal([node]);
                 });
 
@@ -39,12 +38,12 @@ describe('lib/context-visitor', function() {
                     let parentUnresolvedClosure = {};
                     parent._reactUnresolved = [parentUnresolvedClosure];
                     node._context.closure = node;
-                    leave(state, node, parent);
+                    leave(node, parent);
                     expect(parent._reactUnresolved).deep.equal([parentUnresolvedClosure, node]);
                 });
 
                 it('should not care for any other node type', () => {
-                    leave(state, node, parent);
+                    leave(node, parent);
                     expect(parent).to.not.have.property('_reactUnresolved');
                 });
             });
@@ -57,12 +56,12 @@ describe('lib/context-visitor', function() {
 
                 it ('should not care for closure nodes', () => {
                     node._context.closure = node;
-                    leave(state, node, parent);
+                    leave(node, parent);
                     expect(parent).to.not.have.property('_reactUnresolved');
                 });
 
                 it ('should not care for nonclosure nodes', () => {
-                    leave(state, node, parent);
+                    leave(node, parent);
                     expect(parent).to.not.have.property('_reactUnresolved');
                 });
             });

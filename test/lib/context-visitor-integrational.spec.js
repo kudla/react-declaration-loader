@@ -26,14 +26,14 @@ describe('lib/context-visitor-integrational', function() {
             let ast = esprima.parse(source, {comment: true});
             let counter = {};
             traverse(ast, contextVisitor, {
-                enter(stateIgnored, node) {
+                enter(node) {
                     if (!node._countId) {
                         let _countId = (counter[node.type] + 1) || 0;
                         node._countId = _countId;
                         counter[node.type] = _countId;
                     }
                 },
-                IdentifierEnter(stateIgnored, node) {
+                IdentifierEnter(node) {
                     checkNode(node);
                 }
             });
