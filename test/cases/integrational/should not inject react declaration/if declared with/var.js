@@ -1,0 +1,2 @@
+var React = {};
+React.render();
