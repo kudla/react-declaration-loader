@@ -25,3 +25,5 @@ rules:
       argsIgnorePattern: "[iI]gnored"
     }
   ]
+parserOptions:
+  sourceType: module
