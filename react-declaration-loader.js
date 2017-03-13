@@ -38,15 +38,7 @@ function reactDeclarationLoader(source) {
             if (unresolvedInThisClosure){
                 var conflicts = declarations
                     .filter(function(node){
-                        var context = node._context;
-                        switch (node.type) {
-                            case 'VariableDeclaration':
-                                return context.declarationNode.kind !== 'var';
-                            case 'ImportSpecifier':
-                            case 'ImportDefaultSpecifier':
-                            case 'ImportNamespaceSpecifier':
-                                return true;
-                        }
+                        return node._uniqueDeclaration;
                     }).length;
                 injectReact = !conflicts;
             } else if (!declarations.length) {
