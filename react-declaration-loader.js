@@ -38,8 +38,15 @@ function reactDeclarationLoader(source) {
             if (unresolvedInThisClosure){
                 var conflicts = declarations
                     .filter(function(node){
-                        return node.type === 'VariableDeclaration' &&
-                            node.kind !== 'var';
+                        var context = node._context;
+                        switch (node.type) {
+                            case 'VariableDeclaration':
+                                return context.declarationNode.kind !== 'var';
+                            case 'ImportSpecifier':
+                            case 'ImportDefaultSpecifier':
+                            case 'ImportNamespaceSpecifier':
+                                return true;
+                        }
                     }).length;
                 injectReact = !conflicts;
             } else if (!declarations.length) {

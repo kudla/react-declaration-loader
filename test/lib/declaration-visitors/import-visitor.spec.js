@@ -3,7 +3,7 @@
 const expect = require('chai').expect;
 const {ImportDeclarationEnter} = require('../../../lib/declaration-visitors/import-visitor');
 
-describe.skip('lib/declaration-visitors/import-visitor', () => {
+describe('lib/declaration-visitors/import-visitor', () => {
     let declarations;
     let globalScope;
     let importDeclarationSpecifiers;
