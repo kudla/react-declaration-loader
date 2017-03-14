@@ -1,2 +1,2 @@
-import { SomeMember as React } from 'react';
+import {SomeMember as React} from 'react';
 React.render();

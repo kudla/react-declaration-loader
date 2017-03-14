@@ -1,3 +1,3 @@
 /* global React */
-import { NonReactIgnored } from 'react';
+import {NonReactIgnored} from 'react';
 React.render();

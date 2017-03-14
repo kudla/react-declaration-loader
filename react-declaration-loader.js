@@ -2,7 +2,7 @@
 
 var esprima = require('esprima');
 var traverse = require('./lib/traverse');
-var escodegen = require('escodegen');
+var astring = require('astring');
 var contextVisitor = require('./lib/context-visitor');
 var declarationVisitors = require('./lib/declaration-visitors');
 var reactReferenceVisitor = require('./lib/react-reference-visitor');
@@ -52,8 +52,6 @@ function reactDeclarationLoader(source) {
             var injectIndex = 0;
             var body = program.body;
 
-            ast = escodegen.attachComments(ast, ast.comments, ast.tokens);
-
             while(injectIndex < body.length) {
                 var childNode = body[injectIndex];
                 if (!childNode.directive) {
@@ -62,7 +60,10 @@ function reactDeclarationLoader(source) {
                 injectIndex = injectIndex + 1;
             }
             body.splice(injectIndex, 0, esprima.parse('var React = require(\'react\');'));
-            source = escodegen.generate(ast, {comment: true});
+            source = astring(ast, {
+                comment: true,
+                indent: '    '
+            });
         }
     }
 }
