@@ -65,15 +65,5 @@ function b(c) {
             "type": "FunctionDeclaration",
             "id": 0
         }
-    }],
-    "BlockStatement": [{
-        "closure": {
-            "type": "FunctionDeclaration",
-            "id": 0
-        },
-        "block": {
-            "type": "BlockStatement",
-            "id": 0
-        }
     }]
 }

@@ -1,0 +1,3 @@
+({some: {React}}) => {
+    React.render();
+};

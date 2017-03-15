@@ -1,6 +1,6 @@
 var a;
-((b) => {
-    var c;
+(function b(c) {
+    var d;
 })
 // should produce such a context structure ---------------------------------------
 {
@@ -17,21 +17,31 @@ var a;
         },
         "b": {
             "closure": {
-                "type": "ArrowFunctionExpression",
+                "type": "FunctionExpression",
                 "id": 0
             },
             "block": {
-                "type": "ArrowFunctionExpression",
+                "type": "FunctionExpression",
                 "id": 0
             }
         },
         "c": {
             "closure": {
-                "type": "ArrowFunctionExpression",
+                "type": "FunctionExpression",
                 "id": 0
             },
             "block": {
-                "type": "ArrowFunctionExpression",
+                "type": "FunctionExpression",
+                "id": 0
+            }
+        },
+        "d": {
+            "closure": {
+                "type": "FunctionExpression",
+                "id": 0
+            },
+            "block": {
+                "type": "FunctionExpression",
                 "id": 0
             }
         }
@@ -46,13 +56,13 @@ var a;
             "id": 0
         }
     }],
-    "ArrowFunctionExpression": [{
+    "FunctionExpression": [{
         "closure": {
-            "type": "ArrowFunctionExpression",
+            "type": "FunctionExpression",
             "id": 0
         },
         "block": {
-            "type": "ArrowFunctionExpression",
+            "type": "FunctionExpression",
             "id": 0
         }
     }]

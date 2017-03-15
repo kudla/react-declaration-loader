@@ -1,0 +1,3 @@
+({Nonreact: React}) => {
+    React.render();
+};
