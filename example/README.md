@@ -1,4 +1,4 @@
-# react-declaration-loader example app
+# **react-declaration-loader** example app
 
 ### To run dev server
 ```bash
