@@ -15,7 +15,7 @@ So **react-declaration-loader** is doing it's job. If it detects references
 to **React** without appropriate declaration it populates your source with
 needed one.
 
-Thus you may wright out your code just like this
+Thus you may write out your code just like this
 ```jsx
 import {Component} from 'react';
 export class MyComponent extends Component {
