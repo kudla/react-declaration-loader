@@ -2,7 +2,7 @@
 
 Populates **JSX** sources with React declaration.
 
-Since **JSX** turns out your XML kind of
+Since **JSX** converts your XML kind of
 
 ```jsx
 return <span>{userStatus}</span>;
